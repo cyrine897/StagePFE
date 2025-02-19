@@ -53,7 +53,7 @@ public class UtilisateurDetailsImpl implements UserDetails {
     private Collection<? extends GrantedAuthority> authorities;
 
     public UtilisateurDetailsImpl(Long id, String username, String email, String password,
-                                  String prenom, String nom, String adresse, @NotBlank LocalDate date_naissance, Long numero,
+                                  String prenom, String nom, String adresse,  LocalDate date_naissance, Long numero,
                                   @NotNull Set<Role> roles, Collection<? extends GrantedAuthority> authorities, String rolee) {
         this.id = id;
         this.username = username;
@@ -62,7 +62,7 @@ public class UtilisateurDetailsImpl implements UserDetails {
         this.prenom = prenom;
         this.nom = nom;
         this.adresse = adresse;
-        this.date_naissance = date_naissance;
+        this.date_naissance=date_naissance;
         this.numero = numero;
         this.roles =roles;
         this.authorities = authorities;
@@ -144,7 +144,7 @@ public class UtilisateurDetailsImpl implements UserDetails {
         this.adresse = adresse;
     }
 
-    public LocalDate  getDate_naissance() {
+    public LocalDate getDate_naissance() {
         return date_naissance;
     }
 

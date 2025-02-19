@@ -22,7 +22,7 @@ public class Ordonnance implements Serializable {
    Date date;
     String instructions;
     @ManyToOne
-    @JoinColumn(name = "utilisateur_id")
+    @JoinColumn(name = "id_user")
     private Utilisateur utilisateur;
     @ManyToMany(mappedBy = "ordonnances")
     private Set<Medicament> medicaments;

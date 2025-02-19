@@ -1,5 +1,7 @@
 package com.example.sahtyapp1.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -19,7 +21,16 @@ public class Role {
     @Enumerated(EnumType.STRING)
     @Column(length = 20, nullable = false, unique = true)
     private ERole name;
+    private boolean verified;
 
+    // getters and setters
+    public boolean isVerified() {
+        return verified;
+    }
+
+    public void setVerified(boolean verified) {
+        this.verified = verified;
+    }
     public Role() {
 
     }

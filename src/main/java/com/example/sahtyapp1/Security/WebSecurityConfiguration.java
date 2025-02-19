@@ -1,8 +1,12 @@
 package com.example.sahtyapp1.Security;
 import com.example.sahtyapp1.ServiceImpl.UtilisateurDetailServiceImpl;
+import com.fasterxml.jackson.core.StreamWriteConstraints;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -15,13 +19,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
 
-import java.util.Arrays;
-
-import org.springframework.web.cors.CorsConfigurationSource;
 
 
 @Configuration
@@ -32,7 +34,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 @EnableWebSecurity
 
 
-public class WebSecurityConfiguration  {
+public class WebSecurityConfiguration {
     @Autowired
     UtilisateurDetailServiceImpl utilisateurDetailService;
 
@@ -55,6 +57,15 @@ public class WebSecurityConfiguration  {
     }
 
     @Bean
+    public ObjectMapper objectMapper() {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.getFactory().setStreamWriteConstraints(
+                StreamWriteConstraints.builder().maxNestingDepth(2000).build()
+        );
+        return mapper;
+    }
+
+    @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
         return authConfig.getAuthenticationManager();
     }
@@ -66,7 +77,7 @@ public class WebSecurityConfiguration  {
 
 
 
-    @Bean
+   /* @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable())
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
@@ -82,6 +93,31 @@ public class WebSecurityConfiguration  {
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
-    }
+    }*/
+   @Bean
+   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+       http.csrf(csrf -> csrf.disable())
+               .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
+               .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+               .authorizeHttpRequests(auth ->
+                       auth
+                               .requestMatchers("/api/auth/**").permitAll()
+                               .requestMatchers("/api/test/**").permitAll()
+                               .anyRequest().authenticated()
+               )
+               .logout(logout -> logout
+                       .logoutUrl("/api/auth/logout")
+                       .logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler(HttpStatus.OK))
+                       .invalidateHttpSession(true)
+                       .deleteCookies("JSESSIONID")
+               );
 
+       http.authenticationProvider(authenticationProvider());
+
+       http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+
+       return http.build();
    }
+
+
+}
