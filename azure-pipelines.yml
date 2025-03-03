@@ -1,15 +1,17 @@
 trigger:
-  - main  # Déclenche le pipeline sur la branche principale
+  - main  # Exécute le pipeline sur la branche principale
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: 'windows-latest'  
+
 
 steps:
-  - checkout: self  # Clone automatiquement le dépôt source
+  - checkout: self  # Clone automatiquement le dépôt
 
   - script: |
       echo "Getting Project DevOps from Git"
       mvn --version
     displayName: 'Get MVN Version'
+
 
 
