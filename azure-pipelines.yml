@@ -1,23 +1,15 @@
-pipeline {
-    agent any
+trigger:
+  - main  # Déclenche le pipeline sur la branche principale
 
-    tools {
-        maven 'Maven399' 
-    }
+pool:
+  vmImage: 'ubuntu-latest'
 
-    stages {
-        stage('GIT Checkout') {
-            steps {
-              echo "Getting Project Devops from Git"
-                git branch: 'source', credentialsId: 'GitHubToken', url: 'https://github.com/cyrine897/StagePFE.git'
-            }
-        }
+steps:
+  - checkout: self  # Clone automatiquement le dépôt source
 
-        stage('Get MVN Version') {
-            steps {
-                echo "Running Maven Version"
-                sh 'mvn --version' 
-            }
-        }
-    }
-}
+  - script: |
+      echo "Getting Project DevOps from Git"
+      mvn --version
+    displayName: 'Get MVN Version'
+
+
