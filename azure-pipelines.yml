@@ -11,6 +11,8 @@ stages:
 - stage: Build
   jobs:
   - job: BuildJob
+    strategy:
+      maxParallel: 1  # Limite à 1 job parallèle
     steps:
     - task: UseDotNet@2
       inputs:
