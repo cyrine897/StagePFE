@@ -4,11 +4,38 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
-steps:
-- script: echo "Hello, world!"
-  displayName: 'Run a one-line script'
+variables:
+  buildConfiguration: 'Release'
 
-- script: |
-    echo "Add other tasks to build, test, and deploy your project."
-    echo "See https://aka.ms/yaml"
-  displayName: 'Run a multi-line script'
+stages:
+- stage: Build
+  jobs:
+  - job: BuildJob
+    steps:
+    - task: UseDotNet@2
+      inputs:
+        packageType: 'sdk'
+        version: '6.x'
+        installationPath: $(Agent.ToolsDirectory)/dotnet
+
+    - script: |
+        echo "Restoring NuGet packages"
+        dotnet restore
+      displayName: 'Restore NuGet Packages'
+
+    - script: |
+        echo "Building the project"
+        dotnet build --configuration $(buildConfiguration)
+      displayName: 'Build Project'
+
+    - script: |
+        echo "Running unit tests"
+        dotnet test --configuration $(buildConfiguration)
+      displayName: 'Run Unit Tests'
+
+- stage: Deploy
+  jobs:
+  - job: DeployJob
+    steps:
+    - script: echo "Deploying the application"
+      displayName: 'Deploy Step'
