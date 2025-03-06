@@ -1,43 +1,46 @@
 trigger:
-- main
+  branches:
+    include:
+      - main
+      - source
 
 pool:
   vmImage: 'ubuntu-latest'
 
 variables:
-  buildConfiguration: 'Release'
+  sonarToken: 'admin'
+  sonarPassword: '22922325Rr24.'
 
 stages:
 - stage: Build
+  displayName: "Build Stage"
   jobs:
   - job: BuildJob
-    strategy:
-      maxParallel: 1  # Limite à 1 job parallèle
+    displayName: "Build and Test"
     steps:
-    - task: UseDotNet@2
-      inputs:
-        packageType: 'sdk'
-        version: '6.x'
-        installationPath: $(Agent.ToolsDirectory)/dotnet
+      - checkout: self
+        displayName: "Checkout Code"
 
-    - script: |
-        echo "Restoring NuGet packages"
-        dotnet restore
-      displayName: 'Restore NuGet Packages'
+      - script: |
+          echo "Running Maven Clean"
+          mvn clean
+        displayName: "Maven Clean"
 
-    - script: |
-        echo "Building the project"
-        dotnet build --configuration $(buildConfiguration)
-      displayName: 'Build Project'
+      - script: |
+          echo "Running Maven Compile"
+          mvn compile
+        displayName: "Maven Compile"
+      - task: PublishBuildArtifacts@1
+        inputs:
+          artifactName: 'drop'
+          targetPath: '$(Build.ArtifactStagingDirectory)'
+        displayName: "Publish Build Artifacts"
 
-    - script: |
-        echo "Running unit tests"
-        dotnet test --configuration $(buildConfiguration)
-      displayName: 'Run Unit Tests'
-
-- stage: Deploy
+- stage: QualityGate
+  displayName: "SonarQube Quality Gate"
   jobs:
-  - job: DeployJob
+  - job: QualityCheck
     steps:
-    - script: echo "Deploying the application"
-      displayName: 'Deploy Step'
+      - script: |
+          echo "Checking SonarQube Quality Gate"
+        displayName: "Wait for Quality Gate"
