@@ -1,0 +1,40 @@
+trigger:
+  branches:
+    include:
+      - main
+      - source
+pool:
+  vmImage: 'ubuntu-latest'
+stages:
+- stage: Build
+  displayName: "Build Stage"
+  jobs:
+  - job: BuildJob
+    displayName: "Build and Test"
+    steps:
+      - checkout: self
+        displayName: "Checkout Code"
+
+      - script: |
+          echo "Running Maven Clean"
+          mvn clean
+        displayName: "Maven Clean"
+
+      - script: |
+          echo "Running Maven Compile"
+          mvn compile
+        displayName: "Maven Compile"
+      - task: PublishBuildArtifacts@1
+        inputs:
+          artifactName: 'drop'
+          targetPath: '$(Build.ArtifactStagingDirectory)'
+        displayName: "Publish Build Artifacts"
+
+- stage: QualityGate
+  displayName: "SonarQube Quality Gate"
+  jobs:
+  - job: QualityCheck
+    steps:
+      - script: |
+          echo "Checking SonarQube Quality Gate"
+        displayName: "Wait for Quality Gate"
