@@ -3,8 +3,9 @@ trigger:
     include:
       - main
       - source
-pool:
-  vmImage: 'ubuntu-latest'
+pool: default
+ 
+
 stages:
 - stage: Build
   displayName: "Build Stage"
