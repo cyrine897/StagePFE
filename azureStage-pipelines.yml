@@ -5,9 +5,9 @@ trigger:
       - source
 
 pool:
-  name: Default
+  name: Default  # Nom du pool
   demands:
-    - maven
+    - Agent.Name -equals MYAGENT  # Spécifie l'agent exact
 
 stages:
 - stage: Build
