@@ -3,7 +3,11 @@ trigger:
     include:
       - main
       - source
-pool: default
+
+pool:
+  name: Default
+  demands:
+    - maven
 
 stages:
 - stage: Build
@@ -15,16 +19,19 @@ stages:
       - checkout: self
         displayName: "Checkout Repository"
 
-      - task: Maven@3
-        displayName: "Run Maven Clean"
-        inputs:
-          mavenVersionOption: 'Default'
-          mavenPomFile: 'pom.xml'
-          goals: 'clean'
-          publishJUnitResults: false
+      - script: |
+          echo "Installing Maven if not present..."
+          sudo apt-get update
+          sudo apt-get install -y maven
+          mvn -version
+        displayName: "Install Maven"
+
+      - script: |
+          echo "Running Maven Clean"
+          mvn clean
+        displayName: "Maven Clean"
 
       - script: |
           echo "Compiling the project using Maven"
           mvn compile
         displayName: "Maven Compile"
-
