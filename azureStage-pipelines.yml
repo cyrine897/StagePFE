@@ -3,7 +3,6 @@ trigger:
     include:
       - main
       - source
-
 pool: default
 
 stages:
@@ -29,18 +28,3 @@ stages:
           mvn compile
         displayName: "Maven Compile"
 
-      - task: PublishBuildArtifacts@1
-        displayName: "Publish Build Artifacts"
-        inputs:
-          artifactName: 'drop'
-          targetPath: '$(Build.ArtifactStagingDirectory)'
-
-- stage: QualityGate
-  displayName: "SonarQube Quality Gate"
-  jobs:
-  - job: QualityCheck
-    displayName: "Run SonarQube Analysis"
-    steps:
-      - script: |
-          echo "Waiting for SonarQube Quality Gate result..."
-        displayName: "Check SonarQube Quality Gate"
