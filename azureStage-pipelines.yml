@@ -3,39 +3,44 @@ trigger:
     include:
       - main
       - source
+
 pool: default
- 
 
 stages:
 - stage: Build
-  displayName: "Build Stage"
+  displayName: "Build and Test Stage"
   jobs:
   - job: BuildJob
-    displayName: "Build and Test"
+    displayName: "Build and Run Tests"
     steps:
       - checkout: self
-        displayName: "Checkout Code"
+        displayName: "Checkout Repository"
+
+      - task: Maven@3
+        displayName: "Run Maven Clean"
+        inputs:
+          mavenVersionOption: 'Default'
+          mavenPomFile: 'pom.xml'
+          goals: 'clean'
+          publishJUnitResults: false
 
       - script: |
-          echo "Running Maven Clean"
-          mvn clean
-        displayName: "Maven Clean"
-
-      - script: |
-          echo "Running Maven Compile"
+          echo "Compiling the project using Maven"
           mvn compile
         displayName: "Maven Compile"
+
       - task: PublishBuildArtifacts@1
+        displayName: "Publish Build Artifacts"
         inputs:
           artifactName: 'drop'
           targetPath: '$(Build.ArtifactStagingDirectory)'
-        displayName: "Publish Build Artifacts"
 
 - stage: QualityGate
   displayName: "SonarQube Quality Gate"
   jobs:
   - job: QualityCheck
+    displayName: "Run SonarQube Analysis"
     steps:
       - script: |
-          echo "Checking SonarQube Quality Gate"
-        displayName: "Wait for Quality Gate"
+          echo "Waiting for SonarQube Quality Gate result..."
+        displayName: "Check SonarQube Quality Gate"
