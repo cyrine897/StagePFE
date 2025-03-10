@@ -1,0 +1,32 @@
+trigger:
+  branches:
+    include:
+      - main
+      - source 
+
+pool:
+  name: Default  # Utilise ton agent personnalisé ici si nécessaire
+
+stages:
+- stage: Build
+  displayName: "Build and Test Stage"
+  jobs:
+  - job: BuildJob
+    displayName: "Build and Run Tests"
+    steps:
+      - checkout: self
+        displayName: "Checkout Repository"
+
+      - script: |
+          echo "Switching to the 'source' branch"
+          git checkout source  # Change explicitement vers la branche source si nécessaire
+          echo "Navigating to the project directory"
+          cd $(Build.SourcesDirectory)  # Assure-toi que pom.xml est dans ce répertoire
+          echo "Running Maven Clean"
+          mvn clean
+        displayName: "Maven Clean"
+
+      - script: |
+          echo "Compiling the project using Maven"
+          mvn compile
+        displayName: "Maven Compile"
