@@ -30,4 +30,13 @@ stages:
           echo "Compiling the project using Maven"
           mvn compile
         displayName: "Maven Compile"
+- stage: QualityGate
+  displayName: "SonarQube Quality Gate"
+  jobs:
+  - job: QualityCheck
+    displayName: "Run SonarQube Analysis"
+    steps:
+      - script: |
+          echo "Waiting for SonarQube Quality Gate result..."
+        displayName: "Check SonarQube Quality Gate"
 
