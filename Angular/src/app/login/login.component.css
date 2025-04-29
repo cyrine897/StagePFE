@@ -1,0 +1,18 @@
+.mbdesign{
+    max-width: 500px;
+      padding: 20px;
+      width: 1000px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      background-color: transparent;
+      margin-left: -550px;
+      margin-top: 100px;
+}
+.full-width-container {
+  width: 99.3vw; /* Utilise toute la largeur de la fenêtre de visualisation */
+  margin: 0; /* Supprime les marges */
+  padding: 0 20px; /* Ajustez le padding selon les besoins pour la mise en page */
+  box-sizing: border-box; /* Inclut le padding et la bordure dans la largeur totale */
+  margin-left: -500px;
+  margin-top: 500px;
+}

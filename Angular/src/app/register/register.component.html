@@ -1,0 +1,370 @@
+
+<div class="container-fluid bg-primary py-5 mb-5 hero-header">
+  <div class="container py-5">
+      <div class="row justify-content-start">
+          <div class="col-lg-8 text-center text-lg-start">
+            <h5 class="d-inline-block text-primary text-uppercase border-bottom border-5" style="font-size: 30px; margin-left: -400px; ;border-color: rgba(256, 256, 256, .3) !important;">Welcome To Medinova</h5>
+            <h1 style="font-size: 100px; margin-left: -400px; margin-top: 50px;" class="display-1 text-white mb-md-4">Best Healthcare Solution <br> <br> <br> In Your City</h1>
+            
+              <section class="vh-100">
+                <div class="container-fluid h-custom">
+                  <div class="row d-flex justify-content-center align-items-center h-100">
+                    <div class="col-md-9 col-lg-6 col-xl-5">
+                      
+                    </div>
+                    <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+                      <div class="mbdesign">
+                        <ul class="nav nav-tabs" id="authTab" role="tablist">
+                          <li class="nav-item" role="presentation">
+                            <a class="nav-link active" id="patient-tab" data-bs-toggle="tab" href="#patient" role="tab" aria-controls="patient" aria-selected="true">Espace Patient</a>
+                          </li>
+                          <li class="nav-item" role="presentation">
+                            <a class="nav-link" id="medecin-tab" data-bs-toggle="tab" href="#medecin" role="tab" aria-controls="medecin" aria-selected="false">Espace Médecin</a>
+                          </li>
+                          <li class="nav-item" role="presentation">
+                            <a class="nav-link" id="pharmacien-tab" data-bs-toggle="tab" href="#pharmacien" role="tab" aria-controls="pharmacien" aria-selected="false">Espace Pharmacien</a>
+                          </li>
+                        </ul>
+                        <div class="tab-content" id="authTabContent">
+                          <!-- Espace Patient -->
+                          <div class="tab-pane fade show active" id="patient" role="tabpanel" aria-labelledby="patient-tab">
+                            <h1 style="color: rgb(6, 96, 82); margin-left: 150px;size: 300px; font-size: large; size: 100px; font-family: Verdana, Geneva, Tahoma, sans-serif; font-weight: 400;">Espace Patient</h1>
+                            <form (ngSubmit)="register('PATIENT' ,  $event)">
+                              <!-- Formulaire commun ici -->
+                              <!-- Exemple de champs -->
+                              <div class="mb-3">
+                                <label style="color: rgb(250, 249, 249);"  for="username" class="form-label">Nom d'utilisateur</label>
+                                <input type="text" id="username" class="form-control form-control-lg" placeholder="Entrer votre Nom d'utilisation" name="username" [(ngModel)]="registerRequest.username" required>
+                              </div>
+                              <div class="mb-3">
+                                <label style="color: rgb(250, 249, 249);"  for="username" class="form-label">Prenom </label>
+                                <input type="text"id="form3Example3" class="form-control form-control-lg"
+                                placeholder="Entrer votre Prenom"  name="username" [(ngModel)]="registerRequest.prenom" required>
+                              </div>
+                    
+                              <div class="mb-3">
+                                <label style="color: rgb(250, 249, 249);"  for="username" class="form-label">Nom de Famille</label>
+                                <input type="text"id="form3Example3" class="form-control form-control-lg"
+                                placeholder="Entrer votre Nom"  name="nom" [(ngModel)]="registerRequest.nom" required>
+                              </div>
+                              <div class="mb-3">
+                                <label style="color: rgb(250, 249, 249);"  for="email" class="form-label">Email</label>
+                                <input id="form3Example3" class="form-control form-control-lg"
+                                placeholder="Entrer votre @email"  type="email" class="form-control" id="email" name="email" [(ngModel)]="registerRequest.email" required>
+                              </div> 
+                              <div class="mb-3">
+                                <label style="color: rgb(250, 249, 249);"  for="Adresse" class="form-label">Adresse</label>
+                                <input type="text"id="form3Example3" class="form-control form-control-lg"
+                                placeholder="Entrer votre adresse"  name="Adresse" [(ngModel)]="registerRequest.adresse" required>
+                              </div>
+                              <div class="mb-3">
+                                <label style="color: rgb(250, 249, 249);"  for="date_naissance" class="form-label">Date de Naissance</label>
+                                <input type="date" id="date_naissance" class="form-control form-control-lg"
+                                       placeholder="Entrer votre date de naissance"
+                                       [(ngModel)]="registerRequest.date_naissance" name="date_naissance" required>
+                              </div>
+                              
+                              <div class="mb-3">
+                                <label style="color: rgb(250, 249, 249);"  for="telephone" class="form-label">Numéro de Téléphone</label>
+                                <input type="tel"  placeholder="Entrer votre Numéro de Téléphone " class="form-control" id="telephone" name="telephone" [(ngModel)]="registerRequest.numero" required>
+                              </div>
+                              
+                              <div class="mb-3">
+                                <label style="color: rgb(250, 249, 249);"  for="password" class="form-label">Mot de passe</label>
+                                <input type="password"  placeholder="Entrer un mot de passe " class="form-control" id="password" name="password" [(ngModel)]="registerRequest.password" required>
+                              </div>
+                              <!-- Autres champs... -->
+                              <div class="mb-3">
+                                <label style="color: rgb(250, 249, 249);"  for="password" class="form-label">Mot de passe</label>
+                                <input type="password" id="password" class="form-control form-control-lg" placeholder="Entrer un mot de passe" name="password" [(ngModel)]="registerRequest.password" required>
+                              </div>
+                              <div class="mb-3">
+                                <label style="color: rgb(250, 249, 249);"  for="confirmPassword" class="form-label">Confirmer le mot de passe</label>
+                                <input type="password" id="confirmPassword" class="form-control form-control-lg" placeholder="Confirmer votre mot de passe" name="confirmPassword" [(ngModel)]="confirmPassword" required>
+                              </div>
+                              <button type="submit" class="btn btn-primary">S'inscrire</button>
+                              <a routerLink="/forgot-password" >Mot de Passe oublié</a>
+
+                            </form>
+                          </div>
+                          <!-- Espace Médecin -->
+                          <div class="tab-pane fade" id="medecin" role="tabpanel" aria-labelledby="medecin-tab">
+                            <h1 style="color: rgb(6, 96, 82); margin-left: 150px;size: 300px; font-size: large; size: 100px; font-family: Verdana, Geneva, Tahoma, sans-serif; font-weight: 400;">Espace Médecin</h1>
+                            <form *ngIf="currentPage === 0" (submit)="register('MEDECIN', $event)">
+                              <div class="mb-3">
+                                <label style="color: rgb(250, 249, 249);" for="username" class="form-label">Nom d'utilisateur</label>
+                                <input type="text" id="username" class="form-control form-control-lg" placeholder="Entrer votre Nom d'utilisateur" name="username" [(ngModel)]="registerRequest.username" required>
+                              </div>
+                              <!-- Autres champs... -->
+                              <div class="mb-3">
+                                <label style="color: rgb(250, 249, 249);" for="prenom" class="form-label">Prénom</label>
+                                <input type="text" id="prenom" class="form-control form-control-lg" placeholder="Entrer votre Prénom" name="prenom" [(ngModel)]="registerRequest.prenom" required>
+                              </div>
+                            
+                              <div class="mb-3">
+                                <label style="color: rgb(250, 249, 249);" for="nom" class="form-label">Nom de Famille</label>
+                                <input type="text" id="nom" class="form-control form-control-lg" placeholder="Entrer votre Nom" name="nom" [(ngModel)]="registerRequest.nom" required>
+                              </div>
+                              <div class="mb-3">
+                                <label style="color: rgb(250, 249, 249);" for="email" class="form-label">Email</label>
+                                <input id="email" class="form-control form-control-lg" placeholder="Entrer votre email" type="email" name="email" [(ngModel)]="registerRequest.email" required>
+                              </div> 
+                              <div class="mb-3">
+                                <label style="color: rgb(250, 249, 249);" for="adresse" class="form-label">Adresse</label>
+                                <input type="text" id="adresse" class="form-control form-control-lg" placeholder="Entrer votre adresse" name="adresse" [(ngModel)]="registerRequest.adresse" required>
+                              </div>
+                              <div class="mb-3">
+                                <label style="color: rgb(250, 249, 249);" for="date_naissance" class="form-label">Date de Naissance</label>
+                                <input type="date" id="date_naissance" class="form-control form-control-lg" placeholder="Entrer votre date de naissance" [(ngModel)]="registerRequest.date_naissance" name="date_naissance" required>
+                              </div>
+                              <div class="mb-3">
+                                <label style="color: rgb(250, 249, 249);" for="telephone" class="form-label">Numéro de Téléphone</label>
+                                <input type="tel" placeholder="Entrer votre Numéro de Téléphone" class="form-control" id="telephone" name="telephone" [(ngModel)]="registerRequest.numero" required>
+                              </div>
+                              <button type="submit" class="btn btn-primary">S'inscrire</button>
+                           
+                            </form>
+                            
+                            <form *ngIf="currentPage === 1" (submit)="onRegisterMed($event)">
+                              <div class="mb-3">
+                                <label for="pieceIdentite" class="form-label">Carte d'identité</label>
+                                <input 
+                                  type="number"  
+                                  placeholder="Entrer votre passeport ou une carte d'identité nationale" 
+                                  class="form-control" 
+                                  id="pieceIdentite" 
+                                  name="pieceIdentite" 
+                                  [(ngModel)]="registerRequest.pieceIdentiteMed" 
+                                  required
+                                  minlength="8" maxlength="12">
+                                
+                                <div *ngIf="!registerRequest.pieceIdentiteMed">
+                                  <small class="text-danger">Ce champ est requis.</small>
+                                </div>
+                                <div *ngIf="registerRequest.pieceIdentiteMed && registerRequest.pieceIdentiteMed.length < 8">
+                                  <small class="text-danger">Le numéro de carte d'identité doit contenir au moins 8 chiffres.</small>
+                                </div>
+                                <div *ngIf="registerRequest.pieceIdentiteMed && registerRequest.pieceIdentiteMed.length > 12">
+                                  <small class="text-danger">Le numéro de carte d'identité ne doit pas dépasser 12 chiffres.</small>
+                                </div>
+                              </div>
+                            
+                              <div class="mb-3">
+                                <label for="date_licence" class="form-label">Date d'Obtention De La Licence</label>
+                                <input type="date" placeholder="Entrer votre Date d'Obtention De La Licence" class="form-control" id="date_licence" name="date_licence" [(ngModel)]="registerRequest.dateObtentionDeLaLicenceMed" required>
+                              </div>
+                            
+                              <div class="mb-3">
+                                <label for="numero_licence" class="form-label">Numéro de licence de Médecin</label>
+                                <input type="tel" placeholder="Entrer votre Numéro de licence de Médecin" class="form-control" id="numero_licence" name="numero_licence" [(ngModel)]="registerRequest.numerodelicencedeMed" required>
+                              </div>
+                              
+                              <div class="mb-3">
+                                <label for="position" class="form-label">Position</label>
+                                <input type="text" placeholder="Entrer votre Position ou votre Titre professionnel" class="form-control" id="position" name="position" [(ngModel)]="registerRequest.positionMed" required>
+                              </div>
+                            
+                              <div class="mb-3">
+                                <label for="qualifications" class="form-label">Qualifications</label>
+                                <input type="text" placeholder="Entrer vos Qualifications" class="form-control" id="qualifications" name="qualifications" [(ngModel)]="registerRequest.qualificationsMed" required>
+                              </div>
+                              <div class="mb-3">
+                                <label style="color: rgb(250, 249, 249);" for="password" class="form-label">Mot de passe</label>
+                                <input 
+                                  type="password" 
+                                  id="password" 
+                                  class="form-control form-control-lg" 
+                                  placeholder="Entrer un mot de passe" 
+                                  name="password" 
+                                  [(ngModel)]="registerRequest.password" 
+                                  (ngModelChange)="validatePassword()" 
+                                  required
+                                >
+                                <div *ngIf="!passwordValid" class="text-danger">
+                                  Le mot de passe doit contenir au moins une lettre majuscule, une lettre minuscule, un chiffre, et ne doit pas contenir de caractères spéciaux comme . ; § ! ?
+                                </div>
+                              </div>
+                              
+                              <div class="mb-3">
+                                <label style="color: rgb(250, 249, 249);" for="confirmPassword" class="form-label">Confirmer le mot de passe</label>
+                                <input 
+                                  type="password" 
+                                  id="confirmPassword" 
+                                  class="form-control form-control-lg" 
+                                  placeholder="Confirmer votre mot de passe" 
+                                  name="confirmPassword" 
+                                  [(ngModel)]="confirmPassword" 
+                                  (ngModelChange)="validatePassword()" 
+                                  required
+                                >
+                                <div *ngIf="!passwordsMatch" class="text-danger">
+                                  Les mots de passe ne correspondent pas.
+                                </div>
+                              </div>
+                             
+                              <button  type="submit" class="btn btn-primary">S'inscrire</button>
+                              <a routerLink="/forgot-password" class="btn btn-primary">Mot de Passe oublié</a>
+
+                            </form>
+                            
+                          <!-- Espace Pharmacien -->
+                          <div class="tab-pane fade" id="pharmacien" role="tabpanel" aria-labelledby="pharmacien-tab">
+                            <h1 style="color: rgb(6, 96, 82);  size: 300px; font-size: large; size: 100px; font-family: Verdana, Geneva, Tahoma, sans-serif; font-weight: 400;">Espace Pharmacien</h1>
+
+                            <form (ngSubmit)="register('PHARMACIEN', $event)">
+                              <!-- Formulaire commun ici -->
+                              <!-- Exemple de champs -->
+                              <div *ngIf="currentPage === 0">
+
+                              <div class="mb-3">
+                                <label for="username" class="form-label">Nom d'utilisateur</label>
+                                <input type="text" id="username" class="form-control form-control-lg" placeholder="Entrer votre Nom d'utilisation" name="username" [(ngModel)]="registerRequest.username" required>
+                              </div>
+                              <!-- Autres champs... -->
+                              <div class="mb-3">
+                                <label for="username" class="form-label">Prenom </label>
+                                <input type="text"id="form3Example3" class="form-control form-control-lg"
+                                placeholder="Entrer votre Prenom"  name="username" [(ngModel)]="registerRequest.prenom" required>
+                              </div>
+                    
+                              <div class="mb-3">
+                                <label for="username" class="form-label">Nom de Famille</label>
+                                <input type="text"id="form3Example3" class="form-control form-control-lg"
+                                placeholder="Entrer votre Nom"  name="nom" [(ngModel)]="registerRequest.nom" required>
+                              </div>
+                              <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input id="form3Example3" class="form-control form-control-lg"
+                                placeholder="Entrer votre @email"  type="email" class="form-control" id="email" name="email" [(ngModel)]="registerRequest.email" required>
+                              </div> 
+                              <div class="mb-3">
+                                <label for="Adresse" class="form-label">Adresse</label>
+                                <input type="text"id="form3Example3" class="form-control form-control-lg"
+                                placeholder="Entrer votre adresse"  name="Adresse" [(ngModel)]="registerRequest.adresse" required>
+                              </div>
+                              <div class="mb-3">
+                                <label for="date_naissance" class="form-label">Date de Naissance</label>
+                                <input type="date" id="date_naissance" class="form-control form-control-lg"
+                                       placeholder="Entrer votre date de naissance"
+                                       [(ngModel)]="registerRequest.date_naissance" name="date_naissance" required>
+                              </div>
+                              
+                              <div class="mb-3">
+                                <label for="telephone" class="form-label">Numéro de Téléphone</label>
+                                <input type="tel"  placeholder="Entrer votre Numéro de Téléphone " class="form-control" id="telephone" name="telephone" [(ngModel)]="registerRequest.numero" required>
+                              </div>
+                              </div>
+                              <div *ngIf="currentPage === 1">
+
+                                <form (ngSubmit)="onRegisterMed($event)">
+                                <div class="mb-3">
+                                  <label for="pieceIdentite" class="form-label">Carte d'identité</label>
+                                  <input 
+                                    type="number"  
+                                    placeholder="Entrer votre passeport ou une carte d'identité nationale" 
+                                    class="form-control" 
+                                    id="pieceIdentite" 
+                                    name="pieceIdentite" 
+                                    [(ngModel)]="registerRequest.pieceIdentitPharm" 
+                                    required
+                                    minlength="8" maxlength="12"
+                                    #pieceIdentite="ngModel">
+                                  
+                                  <div *ngIf="pieceIdentite.invalid && (pieceIdentite.dirty || pieceIdentite.touched)">
+                                    <small class="text-danger" *ngIf="pieceIdentite.errors?.['required']">Ce champ est requis.</small>
+                                    <small class="text-danger" *ngIf="pieceIdentite.errors?.['minlength']">Le numéro de carte d'identité doit contenir au moins 8 chiffres.</small>
+                                    <small class="text-danger" *ngIf="pieceIdentite.errors?.['maxlength']">Le numéro de carte d'identité ne doit pas dépasser 12 chiffres.</small>
+                                  </div>
+                                </div>
+                                
+                            
+                               
+                                <div class="mb-3">
+                                  <label for="telephone" class="form-label">Date d'Obtention De La Licence</label>
+                                  <input type="date"  placeholder="Entrer votre Date d'Obtention De La Licence " class="form-control" id="telephone" name="telephone" [(ngModel)]="registerRequest.dateObtentionDeLaLicencePharm" required>
+                                </div>
+                              <div class="mb-3">
+                                <label for="telephone" class="form-label">Numero de licence de pharmacien</label>
+                                <input type="tel"  placeholder="Entrer votre Numero de licence de pharmacien " class="form-control" id="telephone" name="telephone" [(ngModel)]="registerRequest.numerodelicencePharm" required>
+                              </div>
+                              <div class="mb-3">
+                                <label for="telephone" class="form-label">Position</label>
+                                <input type="tel"  placeholder="Entrer votre Position ou votre Titre professionnel" class="form-control" id="telephone" name="telephone" [(ngModel)]="registerRequest.positionPharm" required>
+                              </div>
+
+                              <div class="mb-3">
+                                <label for="telephone" class="form-label">Qualifications</label>
+                                <input type="tel"  placeholder="Entrer votre Qualifications " class="form-control" id="telephone" name="telephone" [(ngModel)]="registerRequest.qualificationsPharm" required>
+                              </div>
+                              
+                              <div class="mb-3">
+                                <label for="password" class="form-label">Mot de passe</label>
+                                <input type="password" id="password" class="form-control form-control-lg" placeholder="Entrer un mot de passe" name="password" [(ngModel)]="registerRequest.password" required>
+                              </div>
+                              
+                              <div class="mb-3">
+                                <label for="confirmPassword" class="form-label">Confirmer le mot de passe</label>
+                                <input type="password" id="confirmPassword" class="form-control form-control-lg" placeholder="Confirmer votre mot de passe" name="confirmPassword" [(ngModel)]="confirmPassword" required>
+                              </div>
+                             </form> </div>
+                              <app-pagination style="margin: 20px; margin-right: 20px;" [totalPages]="totalPages" [currentPage]="currentPage" (pageChange)="changePage($event)"></app-pagination>
+                              <br>
+                              <button type="submit" class="btn btn-primary">S'inscrire</button>
+                              <a routerLink="/forgot-password" class="btn btn-primary">Mot de Passe oublié</a>
+
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-primary full-width-container">
+                  <div class="text-white mb-3 mb-md-0">
+                    Copyright © 2020. All rights reserved.
+                  </div>
+                  <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
+                    <button type="button" class="btn btn-primary btn-floating mx-1">
+                      <i class="fab fa-facebook-f"></i>
+                    </button>
+                    <button type="button" class="btn btn-primary btn-floating mx-1">
+                      <i class="fab fa-twitter"></i>
+                    </button>
+                    <button type="button" class="btn btn-primary btn-floating mx-1">
+                      <i class="fab fa-linkedin-in"></i>
+                    </button>
+                  </div>
+                </div>
+                </div>
+              </section>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

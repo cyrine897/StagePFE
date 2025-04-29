@@ -1,0 +1,327 @@
+ <!-- Topbar Start -->
+ <div class="container-fluid py-2 border-bottom d-none d-lg-block">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 text-center text-lg-start mb-2 mb-lg-0">
+                <div class="d-inline-flex align-items-center">
+                    <a class="text-decoration-none text-body pe-3" href=""><i class="bi bi-telephone me-2"></i>+012 345 6789</a>
+                    <span class="text-body">|</span>
+                    <a class="text-decoration-none text-body px-3" href=""><i class="bi bi-envelope me-2"></i>info@example.com</a>
+                </div>
+            </div>
+            <div class="col-md-6 text-center text-lg-end">
+                <div class="d-inline-flex align-items-center">
+                    <a class="text-body px-2" href="">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a class="text-body px-2" href="">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a class="text-body px-2" href="">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a class="text-body px-2" href="">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a class="text-body ps-2" href="">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Topbar End -->
+
+
+<!-- Navbar Start -->
+<div class="container-fluid sticky-top bg-white shadow-sm">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg bg-white navbar-light py-3 py-lg-0">
+            <a href="index.html" class="navbar-brand">
+                <h1 class="m-0 text-uppercase text-primary"><i class="fa fa-clinic-medical me-2"></i>SahtyApp</h1>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto py-0">
+                    <a href="index.html" class="nav-item nav-link active">Home</a>
+                    <a href="about.html" class="nav-item nav-link">About</a>
+                    <a href="service.html" class="nav-item nav-link">Service</a>
+                    <a href="price.html" class="nav-item nav-link">Pricing</a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                        <div class="dropdown-menu m-0">
+                            <a href="blog.html" class="dropdown-item">Blog Grid</a>
+                            <a href="detail.html" class="dropdown-item">Blog Detail</a>
+                            <a href="team.html" class="dropdown-item">The Team</a>
+                            <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                            <a href="appointment.html" class="dropdown-item">Appointment</a>
+                            <a href="search.html" class="dropdown-item">Search</a>
+                        </div>
+                    </div>
+                    <a href="contact.html" class="nav-item nav-link">Contact</a>
+                    <a (click)="logout()" class="nav-item nav-link">Deconexion</a>
+                    
+                    <ul >
+                           <!-- profile.component.html -->
+                    
+                      
+                      <div class="profile-photo" *ngIf="photoUrl">
+                        <img [src]="photoUrl" alt="User Photo">
+                      </div>
+                      
+                      
+                      
+                        <!-- Other nav items -->
+                    </ul>
+                   
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
+<!-- Navbar End -->
+<h1 style="margin-left: 450px; margin-top: 50px;" class="display-4">Bienvenue sur votre profil utilisateur ! </h1>
+   <!-- About Start -->
+   <div class="container-fluid py-5">
+    <div class="container">
+        <div class="row gx-5">
+            <div class="col-lg-5 mb-5 mb-lg-0" style="min-height: 500px;">
+                <div class="position-relative h-100">
+                    <img class="position-absolute w-100 h-100 rounded" src="assets/img/about.jpg" style="object-fit: cover;margin-left: -200px; width: 900px;">
+                </div>
+            </div>
+          
+        </div>
+    </div>
+</div>
+<!-- About End -->
+
+<div *ngIf="utilisateur" class="profile-container">
+    <div class="profile-header">
+        <div class="mb-3">
+            <label for="photoInput" class="form-label">Photo de profil :</label>
+            <input type="file" id="photoInput" (change)="onFileSelected($event)" accept="image/*">
+        </div>      
+        <div *ngIf="imageUrl" class="mb-3">
+            <label class="form-label">Aperçu :</label><br>
+            <img style="width: 20%; height: 20%;" [src]="imageUrl" alt="Selected Image" class="img-thumbnail">
+            <h2>{{ utilisateur.photo }}</h2>
+
+          </div>
+      <h2>{{ utilisateur.username }}</h2>
+    </div>
+   
+    
+  
+    <div *ngIf="currentPage === 0">
+     <!--<p>Email: {{ utilisateur.email }}</p>--> 
+     <div class="mb-3">
+        <label class="form-label">Email:</label>
+        <input class="form-control form-control-lg" type="text" [(ngModel)]="utilisateur.email" [disabled]="!editMode">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Nom:</label>
+        <input class="form-control form-control-lg" type="text" [(ngModel)]="utilisateur.nom" [disabled]="!editMode">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Prénom:</label>
+        <input class="form-control form-control-lg" type="text" [(ngModel)]="utilisateur.prenom" [disabled]="!editMode">
+      </div>
+    </div>
+  
+    <div *ngIf="currentPage === 1">
+      <div class="mb-3">
+        <label class="form-label">Username:</label>
+        <input class="form-control form-control-lg" type="text" [(ngModel)]="utilisateur.username" [disabled]="!editMode">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Adresse:</label>
+        <input class="form-control form-control-lg" type="text" [(ngModel)]="utilisateur.adresse" [disabled]="!editMode">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Numero de Téléphone:</label>
+        <input class="form-control form-control-lg" type="text" [(ngModel)]="utilisateur.numero" [disabled]="!editMode">
+      </div></div>
+      <div *ngIf="currentPage === 2">
+
+      <div class="mb-3">
+        <label for="date_naissance" class="form-label">Date de Naissance</label>
+        <input type="date" id="date_naissance" class="form-control form-control-lg"
+               placeholder="Entrer votre date de naissance"
+               [(ngModel)]="utilisateur.date_naissance" name="date_naissance" required>
+               <input class="form-control form-control-lg" type="text" [(ngModel)]="utilisateur.date_naissance" [disabled]="!editMode">
+
+      </div>
+      <div class="mb-3" *ngIf="dossierMedical">
+        <label for="file_name" class="form-label">FileName: {{dossierMedical.fileName}}</label>
+      </div>
+      
+      
+     
+      <div class="mb-3">
+        <input type="text" [(ngModel)]="description" placeholder="Description">
+        <input type="file" (change)="onFileSelected($event)">
+        <input type="text" #fileName placeholder="Enter file name">
+        <button (click)="downloadFile(fileName.value)">Download File</button>
+    </div>
+      
+     
+   
+    
+
+    
+    </div>
+    <div *ngIf="currentPage === 3">
+
+        <div class="mb-3" *ngIf="currentPage === 3">
+            <div *ngIf="dossierMedical">
+              <h3>Dossier Médical de {{ utilisateur.nom }} {{ utilisateur.prenom }}</h3>
+              <p>Email: {{ utilisateur.email }}</p>
+              <!-- Displaying description and file details -->
+              <p>Description: {{ dossierMedical.description }}</p>
+              <p>Nom du fichier: {{ dossierMedical.fileName }}</p>
+              <!-- Example of displaying an image, if applicable -->
+          
+              <!-- Download file button -->
+              <div class="mb-3">
+                <img src="https://cdn-icons-png.flaticon.com/512/7066/7066284.png" jsaction="VQAsE" class="sFlh5c pT0Scc iPVvYb" style="max-width: 512px; height: 119px; margin: 0px; width: 119px;" alt="Dossier médical - Icônes médical gratuites" jsname="kn3ccd" aria-hidden="false">
+                <button (click)="downloadFile(dossierMedical.fileName)">Download File</button>
+              </div>
+            </div>
+          
+            <div *ngIf="!dossierMedical">
+              <p>Chargement du dossier médical...</p>
+            </div>
+          
+            <div *ngIf="errorFetching">
+              <p>Erreur lors du chargement du dossier médical. Veuillez réessayer plus tard.</p>
+            </div>
+          </div>
+     </div>
+     <div *ngIf="currentPage === 4">
+      <div *ngIf="utilisateur && utilisateur.dossierMedical">
+        <div class="mb-3">
+          <label for="nom_urgence" class="form-label">Nom d'Urgence</label>
+          <input type="text" id="nom_urgence" class="form-control form-control-lg" placeholder="Nom d'urgence"
+            [(ngModel)]="utilisateur.dossierMedical.nomUrgence" name="nomUrgence" required>
+        </div>
+    
+        <div class="mb-3">
+          <label for="numero_urgence" class="form-label">Numéro d'Urgence</label>
+          <input type="number" id="numero_urgence" class="form-control form-control-lg" placeholder="Numéro d'urgence"
+            [(ngModel)]="utilisateur.dossierMedical.numeroUrgence" name="numeroUrgence" required>
+        </div>
+    
+        <div class="mb-3">
+          <label for="taille" class="form-label">Taille (cm)</label>
+          <input type="number" id="taille" class="form-control form-control-lg" placeholder="Taille"
+            [(ngModel)]="utilisateur.dossierMedical.taille" name="taille" required>
+        </div>
+    
+        <div class="mb-3">
+          <label for="poids" class="form-label">Poids (kg)</label>
+          <input type="number" id="poids" class="form-control form-control-lg" placeholder="Poids"
+            [(ngModel)]="utilisateur.dossierMedical.poids" name="poids" required>
+        </div>
+    
+        <div class="mb-3">
+          <label for="anticedents_medicaments" class="form-label">Antécédents Médicaments</label>
+          <input type="text" id="anticedents_medicaments" class="form-control form-control-lg"
+            placeholder="Antécédents médicaments" [(ngModel)]="utilisateur.dossierMedical.anticedentsMedicaments"
+            name="anticedentsMedicaments" required>
+        </div>
+    
+        <div class="mb-3">
+          <label for="vaccination" class="form-label">Vaccination</label>
+          <input type="text" id="vaccination" class="form-control form-control-lg" placeholder="Vaccination"
+            [(ngModel)]="utilisateur.dossierMedical.vaccination" name="vaccination" required>
+        </div>
+    
+        <div class="mb-3">
+          <label for="date_vaccination" class="form-label">Date de Vaccination</label>
+          <input type="date" id="date_vaccination" class="form-control form-control-lg" placeholder="Date de vaccination"
+            [(ngModel)]="utilisateur.dossierMedical.dateVaccination" name="dateVaccination" required>
+        </div>
+    
+        <div class="mb-3">
+          <label for="fileName" class="form-label">File Name</label>
+          <input type="text" id="fileName" class="form-control form-control-lg" placeholder="File Name"
+            [(ngModel)]="utilisateur.dossierMedical.fileName" name="fileName" required>
+        </div>
+    
+        <div class="mb-3">
+          <label for="filePath" class="form-label">File Path</label>
+          <input type="text" id="filePath" class="form-control form-control-lg" placeholder="File Path"
+            [(ngModel)]="utilisateur.dossierMedical.filePath" name="filePath" required>
+        </div>
+       <!-- profile.component.html -->
+<div class="mb-3">
+  <mat-form-field class="blue-form-field" appearance="fill">
+    <mat-label>Activité Physique</mat-label>
+    <mat-select [(ngModel)]="utilisateur.dossierMedical.activitePhysique" name="activitePhysique" multiple>
+      <mat-option *ngFor="let activite of activitePhysiques" [value]="activite">{{ activite }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<div class="mb-3">
+  <mat-form-field class="blue-form-field" appearance="fill">
+    <mat-label>Consommation</mat-label>
+    <mat-select [(ngModel)]="utilisateur.dossierMedical.consommation" name="consommation" multiple>
+      <mat-option *ngFor="let conso of consommations" [value]="conso">{{ conso }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+      </div>
+    </div>
+    
+    
+    
+    
+            
+    <button class="btn btn-primary"  (click)="onSubmit()">{{ editMode ? 'Enregistrer' : 'Modifier' }}</button>
+  
+    <app-pagination style="margin: 20px; margin-right: 20px;" [totalPages]="totalPages" [currentPage]="currentPage" (pageChange)="changePage($event)"></app-pagination>
+  </div>
+
+ 
+  <div *ngIf="!utilisateur">
+    <p>Aucun profil utilisateur trouvé.</p>
+  </div>
+  
+  <div style="margin-top: 200px; margin-left: 350px;" class="col-lg-7">
+    <div  class="mb-4">
+        <h5 class="d-inline-block text-primary text-uppercase border-bottom border-5">Profile</h5>
+        <h1 class="display-4">La meilleure prise en charge  médicale pour vous et votre famille</h1>
+    </div>
+    <p style="margin-left: 100px;">Vous pouvez modifier vos informations ci-dessous</p> 
+       <div class="row g-3 pt-3">
+        <div class="col-sm-3 col-6">
+            <div class="bg-light text-center rounded-circle py-4">
+                <i class="fa fa-3x fa-user-md text-primary mb-3"></i>
+                <h6 class="mb-0">Qualified<small class="d-block text-primary">Doctors</small></h6>
+            </div>
+        </div>
+        <div class="col-sm-3 col-6">
+            <div class="bg-light text-center rounded-circle py-4">
+                <i class="fa fa-3x fa-procedures text-primary mb-3"></i>
+                <h6 class="mb-0">Emergency<small class="d-block text-primary">Services</small></h6>
+            </div>
+        </div>
+        <div class="col-sm-3 col-6">
+            <div class="bg-light text-center rounded-circle py-4">
+                <i class="fa fa-3x fa-microscope text-primary mb-3"></i>
+                <h6 class="mb-0">Accurate<small class="d-block text-primary">Testing</small></h6>
+            </div>
+        </div>
+        <div class="col-sm-3 col-6">
+            <div class="bg-light text-center rounded-circle py-4">
+                <i class="fa fa-3x fa-ambulance text-primary mb-3"></i>
+                <h6 class="mb-0">Free<small class="d-block text-primary">Ambulance</small></h6>
+            </div>
+        </div>
+    </div>
+</div>
