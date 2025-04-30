@@ -109,20 +109,6 @@
             <artifactId>jakarta.validation-api</artifactId>
         </dependency>
 
-
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
-            <version>3.0.0</version> <!-- Add the correct version here -->
-        </dependency>
-
-
-        <!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui -->
-
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
-        </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
