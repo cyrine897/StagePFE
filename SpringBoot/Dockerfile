@@ -8,7 +8,7 @@ WORKDIR /app
 COPY target/SahtyApp1-0.0.1-SNAPSHOT.jar SahtyApp1-0.0.1-SNAPSHOT.jar
 
 # Expose le port sur lequel l'application écoute
-EXPOSE 8082
+EXPOSE 8080
 
 # Commande pour lancer l'application
 ENTRYPOINT ["java", "-jar", "/SahtyApp1-0.0.1-SNAPSHOT.jar"]
