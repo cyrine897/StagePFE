@@ -26,11 +26,6 @@ stages:
         displayName: "Install Maven"
 
       - script: |
-          echo "Running Maven Clean"
-          mvn clean
-        displayName: "Maven Clean"
-
-      - script: |
           echo "Compiling the project using Maven"
           mvn compile
         displayName: "Maven Compile"
